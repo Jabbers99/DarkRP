@@ -371,7 +371,7 @@ local function OwnDoor(ply)
         ent:keysUnOwn(ply)
         ent:setKeysTitle(nil)
         local GiveMoneyBack = math.floor((hook.Call("get" .. (ent:IsVehicle() and "Vehicle" or "Door") .. "Cost", GAMEMODE, ply, ent) * 0.666) + 0.5)
-        hook.Call("playerKeysSold", GAMEMODE, ply, ent, GiveMoneyBack)
+        hook.Call("playerKeysSold", GAMEMODE, ply, ent, GiveMoneyBack, true)
         ply:addMoney(GiveMoneyBack)
         local bSuppress = hook.Call("hideSellDoorMessage", GAMEMODE, ply, ent)
         if not bSuppress then
@@ -456,7 +456,7 @@ local function UnOwnAll(ply, cmd, args)
         ent:keysUnOwn(ply)
         amount = amount + 1
 
-        local GiveMoneyBack = math.floor((hook.Call("get" .. (ent:IsVehicle() and "Vehicle" or "Door") .. "Cost", GAMEMODE, ply, ent) * 0.666) + 0.5)
+        local GiveMoneyBack = math.floor((hook.Call("get" .. (ent:IsVehicle() and "Vehicle" or "Door") .. "Cost", GAMEMODE, ply, ent, true) * 0.666) + 0.5)
         hook.Call("playerKeysSold", GAMEMODE, ply, ent, GiveMoneyBack)
         cost = cost + GiveMoneyBack
     end
